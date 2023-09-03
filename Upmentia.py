@@ -7,11 +7,11 @@ from PIL import Image
 from backend import app
 import uvicorn
 
-if newsession not in st.session_state:
-    st.session_state[newsession] = True
+if "newsession" not in st.session_state:
+    st.session_state["newsession"] = True
     
 if __name__ == "__main__":
-    if st.session_state[newsession]:
+    if st.session_state["newsession"]:
         try:
             uvicorn.run(app, host="0.0.0.0", port=8000)
             st.session_state[newsession] = False
