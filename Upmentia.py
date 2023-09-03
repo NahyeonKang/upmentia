@@ -4,6 +4,10 @@ from audiorecorder import audiorecorder
 import requests
 import io
 from PIL import Image
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 with st.container():
     col1, col2 = st.columns([1,2])
     with col1:
