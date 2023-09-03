@@ -82,8 +82,3 @@ def stt(audio_file: UploadFile = File(...)):
         text = f"음성인식이 실패했습니다. {e}"
     
     return {"text": text}
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="127.0.0.1", port=8000)
