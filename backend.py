@@ -2,6 +2,7 @@ from typing import List
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 import openai
+import streamlit as st
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 app = FastAPI()
