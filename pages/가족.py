@@ -62,7 +62,7 @@ with st.container():
         st.empty()
     with col12:
         pwd = os.getcwd()
-        img_path = os.path.join(pwd, "family.jpg")
+        img_path = os.path.join(pwd, "assets", "family.jpg")
         image = Image.open(img_path)
         st.image(image)
     with col13:
