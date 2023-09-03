@@ -1,0 +1,8 @@
+openai
+fastapi
+streamlit-chat
+streamlit-player
+streamlit-audiorecorder
+python-dotenv
+uvicorn
+python-multipart
