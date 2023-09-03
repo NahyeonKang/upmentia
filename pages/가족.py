@@ -4,6 +4,8 @@ from audiorecorder import audiorecorder
 import requests
 import io
 from PIL import Image
+import os 
+
 chat_url = "http://localhost:8000/chat"
 stt_url = "http://localhost:8000/stt"
 dalle_url = "http://localhost:8000/dalle"
@@ -59,7 +61,9 @@ with st.container():
     with col11:
         st.empty()
     with col12:
-        image = Image.open('../assets/family.jpg')
+        pwd = os.getcwd()
+        img_path = os.path.join(pwd, "family.jpg")
+        image = Image.open(img_path)
         st.image(image)
     with col13:
         st.empty()
