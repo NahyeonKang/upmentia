@@ -6,6 +6,7 @@ import io
 from PIL import Image
 chat_url = "http://localhost:8000/chat"
 stt_url = "http://localhost:8000/stt"
+dalle_url = "http://localhost:8000/dalle"
 
 firstmsg = """당신은 치매환자의 가족입니다. 치매환자가 과거를 회상하고 행복한 추억에 잠길 수 있도록 {subject}에 대한 이야기를 나눌 것입니다. 
 치매환자가 {subject}에 대한 행복한 추억을 회상할 수 있도록 {subject}에 관한 질문을 하나 해주세요.
@@ -28,12 +29,22 @@ if familyfirst not in st.session_state:
 def chat(text):
     user_turn = {"role":"user", "content": text}
     system_msg = {"role":"system", "content":sysmsg.format(subject=familysubject)}
-    messages = st.session_state[familymsg]
+    messages = [i for i in st.session_state[familymsg] if i["role"] != "img"]
     resp = requests.post(chat_url, json={"messages": messages + [user_turn] + [system_msg]})
     assistant_turn = resp.json()
-
     st.session_state[familymsg].append(user_turn)
+
+    if len(text)>4:
+        translate_system_msg = {"role":"system", "content":"Translate to English and turn it into a noun phrase. Just show me a noun phrase"}
+        resp_img = requests.post(dalle_url, json={"messages": [user_turn] + [translate_system_msg]})
+        img_url = resp_img.json()['url']
+        print(img_url)
+        img_turn = {"role":"img", "content": img_url}
+        st.session_state[familymsg].append(img_turn)
+    
     st.session_state[familymsg].append(assistant_turn)
+    
+
 
 def stt(audio_bytes):
     audio_file = io.BytesIO(audio_bytes)
@@ -48,7 +59,7 @@ with st.container():
     with col11:
         st.empty()
     with col12:
-        image = Image.open(f'assets/{familysubject}.jpg')
+        image = Image.open('../assets/family.jpg')
         st.image(image)
     with col13:
         st.empty()
@@ -106,18 +117,24 @@ with row1:
         # length = len(st.session_state[familymsg]) ## 음성합성
 
         for i, msg_obj in enumerate(st.session_state[familymsg]):
+                if msg_obj['role'] == 'img':
+                    url = msg_obj['content']
+                    if "실패" not in url:
+                        message(f'<img width="100%" height="256" src="{url}"/>', is_user=False, key=f"chat_{i}", allow_html=True)
 
-                msg = msg_obj['content']
-                role = msg_obj['role']
+                else:    
 
-                is_user = True
-                if role == "assistant":
-                    is_user = False
-                
-                message(msg, is_user=is_user, key=f"chat_{i}")
+                    msg = msg_obj['content'].replace('\"', '')
+                    role = msg_obj['role']
 
-                ## 음성 합성
-                # if i == length - 1:
-                #     message(msg, is_user=is_user, key=f"chat_{i}")
-                # else:
-                #     message(msg, is_user=is_user, key=f"chat_{i}")
+                    is_user = True
+                    if role == "assistant":
+                        is_user = False
+                    
+                    message(msg, is_user=is_user, key=f"chat_{i}")
+
+                    ## 음성 합성
+                    # if i == length - 1:
+                    #     message(msg, is_user=is_user, key=f"chat_{i}")
+                    # else:
+                    #     message(msg, is_user=is_user, key=f"chat_{i}")

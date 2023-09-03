@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
+from streamlit_player import st_player
 from audiorecorder import audiorecorder
 import requests
 import io
@@ -16,23 +17,23 @@ sysmsg = """당신은 치매환자의 가족입니다. 치매환자가 과거를
 치매환자의 이야기에 따라 상냥하고 긍정적인 반응과 함께 꼬리질문을 해주세요.
 꼬리질문은 짧고 대답하기 쉬운 질문을 해주세요."""
 ## page 변수
-potmsg = 'potmessages'
-potfirst = 'potfirst'
-potsubject = "양은냄비"
-potfirstmsg = firstmsg.format(subject = potsubject)
+homemsg = 'homemessages'
+homefirst = 'homefirst'
+homesubject = "고향"
+homefirstmsg = firstmsg.format(subject = homesubject)
 
-if potmsg not in st.session_state:
-    st.session_state[potmsg] = []
-if potfirst not in st.session_state:
-    st.session_state[potfirst] = True
+if homemsg not in st.session_state:
+    st.session_state[homemsg] = []
+if homefirst not in st.session_state:
+    st.session_state[homefirst] = True
 
 def chat(text):
     user_turn = {"role":"user", "content": text}
-    system_msg = {"role":"system", "content":sysmsg.format(subject=potsubject)}
-    messages = [i for i in st.session_state[potmsg] if i["role"] != "img"]
+    system_msg = {"role":"system", "content":sysmsg.format(subject=homesubject)}
+    messages = [i for i in st.session_state[homemsg] if i["role"] != "img"]
     resp = requests.post(chat_url, json={"messages": messages + [user_turn] + [system_msg]})
     assistant_turn = resp.json()
-    st.session_state[potmsg].append(user_turn)
+    st.session_state[homemsg].append(user_turn)
 
     if len(text)>4:
         translate_system_msg = {"role":"system", "content":"Translate to English and turn it into a noun phrase. Just show me a noun phrase"}
@@ -40,9 +41,9 @@ def chat(text):
         img_url = resp_img.json()['url']
         print(img_url)
         img_turn = {"role":"img", "content": img_url}
-        st.session_state[potmsg].append(img_turn)
+        st.session_state[homemsg].append(img_turn)
     
-    st.session_state[potmsg].append(assistant_turn)
+    st.session_state[homemsg].append(assistant_turn)
     
 
 
@@ -55,21 +56,14 @@ def stt(audio_bytes):
 
 
 with st.container():
-    col11, col12, col13 = st.columns(3)
-    with col11:
-        st.empty()
-    with col12:
-        image = Image.open('../assets/pot.jpg')
-        st.image(image)
-    with col13:
-        st.empty()
+    st_player("https://youtu.be/DVQ259OX1wE?si=LAKilaAaCo8LuZnE", playing=True)
 
 with st.container():
     col1, col2, col3 = st.columns(3)
     with col1:
         st.empty() 
     with col2:
-        st.markdown(f"<h1 style='text-align: center;'>{potsubject}</h1>", unsafe_allow_html=True)
+        st.markdown(f"<h1 style='text-align: center;'>{homesubject}</h1>", unsafe_allow_html=True)
 
     with col3:
         st.empty() 
@@ -94,29 +88,29 @@ with row2:
             audio_bytes = audio.tobytes()
             text = stt(audio_bytes)
             if "음성인식이 실패했습니다." in text:
-                st.session_state[potmsg].append({"role":"assistant", "content": "다시 한번 말해주세요."})
+                st.session_state[homemsg].append({"role":"assistant", "content": "다시 한번 말해주세요."})
             elif len(text) < 3:
-                st.session_state[potmsg].append({"role":"assistant", "content": "다시 한번 말해주세요."})   
+                st.session_state[homemsg].append({"role":"assistant", "content": "다시 한번 말해주세요."})   
             else:
                 chat(text)
 
 with row1:
-    if st.session_state[potfirst] == True:
-        user_turn = {"role":"user", "content": potfirstmsg}
+    if st.session_state[homefirst] == True:
+        user_turn = {"role":"user", "content": homefirstmsg}
         resp = requests.post(chat_url, json={"messages": [user_turn]})
         assistant_turn = resp.json()
 
-        st.session_state[potmsg].append(assistant_turn)
+        st.session_state[homemsg].append(assistant_turn)
 
         msg = assistant_turn['content']
 
         message(msg, is_user=False, key=f"chat_00")
 
-        st.session_state[potfirst] = False
+        st.session_state[homefirst] = False
     else:
-        # length = len(st.session_state[potmsg]) ## 음성합성
+        # length = len(st.session_state[homemsg]) ## 음성합성
 
-        for i, msg_obj in enumerate(st.session_state[potmsg]):
+        for i, msg_obj in enumerate(st.session_state[homemsg]):
                 if msg_obj['role'] == 'img':
                     url = msg_obj['content']
                     if "실패" not in url:

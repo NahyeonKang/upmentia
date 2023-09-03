@@ -9,8 +9,16 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 app = FastAPI()
 
-def chat(messages):
+def translate(messages):
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+
+    resp_dict = response.to_dict_recursive()
+    translated = resp_dict['choices'][0]['message']["content"]
+    
+    return translated
+
+def chat(messages):
+    response = openai.ChatCompletion.create(model="gpt-4", messages=messages)
 
     resp_dict = response.to_dict_recursive()
     assistant_turn = resp_dict['choices'][0]['message']
@@ -23,6 +31,33 @@ class Turn(BaseModel):
 
 class Messages(BaseModel):
     messages: List[Turn]
+
+@app.post("/dalle")
+def post_dalle(messages: Messages):
+    url = "이미지 생성에 실패했습니다."
+    try: 
+        messages = messages.dict()
+        translated = translate(messages=messages['messages'])
+        print(translated)
+
+        try:
+            resp_img = openai.Image.create(
+                prompt = "a photograph of " + translated,
+                n = 1,
+                size = "256x256"
+            )
+            print("+++++++++++++++++++++")
+            print(resp_img)
+            url = resp_img['data'][0]['url']
+        except Exception as e:
+            print(e)
+            print(url)
+            
+    except Exception as e:
+        print(e)
+        print(url)
+
+    return {"url": url}    
 
 
 @app.post("/chat")
@@ -50,3 +85,8 @@ def stt(audio_file: UploadFile = File(...)):
         text = f"음성인식이 실패했습니다. {e}"
     
     return {"text": text}
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=8000)
