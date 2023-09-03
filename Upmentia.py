@@ -7,9 +7,17 @@ from PIL import Image
 from backend import app
 import uvicorn
 
+if newsession not in st.session_state:
+    st.session_state[newsession] = True
+    
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
+    if st.session_state[newsession]:
+        try:
+            uvicorn.run(app, host="0.0.0.0", port=8000)
+            st.session_state[newsession] = False
+        except:
+            pass
+            
 with st.container():
     col1, col2 = st.columns([1,2])
     with col1:
