@@ -69,6 +69,7 @@ family, hometown, pot = st.columns(3)
 with family:
     familypage = card(
         title="가족",
+        text="",
         image=load_image("family"),
         styles={
             "card": {
@@ -86,6 +87,7 @@ with family:
 with hometown:
     hometownpage = card(
         title="고향",
+        text="",
         image=load_image("hometown"),
         styles={
             "card": {
@@ -103,6 +105,7 @@ with hometown:
 with pot:
     potpage = card(
         title="양은냄비",
+        text="",
         image=load_image("pot"),
         styles={
             "card": {
