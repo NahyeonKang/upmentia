@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import FastAPI, UploadFile, File
+import uvicorn
 from pydantic import BaseModel
 import openai
 import streamlit as st
@@ -83,3 +84,6 @@ def stt(audio_file: UploadFile = File(...)):
         text = f"음성인식이 실패했습니다. {e}"
     
     return {"text": text}
+
+if __name__ == "backend":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
