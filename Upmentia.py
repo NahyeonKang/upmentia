@@ -74,7 +74,7 @@ with family:
         on_click=lambda: print("가족 선택"),
         styles={
             "card": {
-                "width": "300px",
+                "width": "100%",
                 "height": "300px",
                 "margin": "0px",
                 "padding": "0px",
@@ -93,7 +93,7 @@ with hometown:
         on_click=lambda: print("고향 선택"),
         styles={
             "card": {
-                "width": "300px",
+                "width": "100%",
                 "height": "300px",
                 "margin": "0px",
                 "padding": "0px",
@@ -112,7 +112,7 @@ with pot:
         on_click=lambda: print("양은냄비 선택"),
         styles={
             "card": {
-                "width": "300px",
+                "width": "100%",
                 "height": "300px",
                 "margin": "0px",
                 "padding": "0px",
