@@ -5,3 +5,4 @@ streamlit-player
 streamlit-audiorecorder
 uvicorn
 python-multipart
+ffmpeg
