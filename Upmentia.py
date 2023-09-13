@@ -46,7 +46,7 @@ with st.container():
 st.markdown('''
 #### :ear:어르신의 추억을 들려주세요!
 #### :smiley:누구랑 이야기할까요? ''')
-wife, husband, son, daughter, grands, grandd, teacher = st.columns(6)
+wife, husband, son, daughter, grands, grandd, teacher = st.columns(7)
 
 with wife:
     st.button('아내', on_click=speak_to, args=['아내'])
