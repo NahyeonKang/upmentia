@@ -6,6 +6,8 @@ import io
 from PIL import Image
 import os 
 
+st.set_page_config(page_title="Upmentia", page_icon=":thumbsup:", initial_sidebar_state="collapsed")
+
 chat_url = "http://localhost:8000/chat"
 stt_url = "http://localhost:8000/stt"
 dalle_url = "http://localhost:8000/dalle"

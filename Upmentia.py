@@ -7,6 +7,8 @@ from PIL import Image
 from backend import app
 import uvicorn
 
+st.set_page_config(page_title="Upmentia", page_icon=":thumbsup:", initial_sidebar_state="collapsed")
+
 if "newsession" not in st.session_state:
     st.session_state["newsession"] = True
     
@@ -15,6 +17,7 @@ if __name__ == "__main__":
         try:
             uvicorn.run(app, host="0.0.0.0", port=8000)
             st.session_state[newsession] = False
+            pass
         except:
             pass
             
