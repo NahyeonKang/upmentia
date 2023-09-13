@@ -3,6 +3,8 @@ fastapi
 streamlit-chat
 streamlit-player
 streamlit-audiorecorder
+streamlit-card
+streamlit-extras
 uvicorn
 python-multipart
 ffmpeg
