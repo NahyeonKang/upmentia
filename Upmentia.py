@@ -71,6 +71,7 @@ with family:
         title="가족",
         text="",
         image=load_image("family"),
+        on_click=lambda: print("가족 선택"),
         styles={
             "card": {
                 "width": "300px",
@@ -89,6 +90,7 @@ with hometown:
         title="고향",
         text="",
         image=load_image("hometown"),
+        on_click=lambda: print("고향 선택"),
         styles={
             "card": {
                 "width": "300px",
@@ -107,6 +109,7 @@ with pot:
         title="양은냄비",
         text="",
         image=load_image("pot"),
+        on_click=lambda: print("양은냄비 선택"),
         styles={
             "card": {
                 "width": "300px",
