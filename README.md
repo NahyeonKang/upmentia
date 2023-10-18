@@ -2,7 +2,9 @@
 
 
 # Upmentia
-## Generative AI를 활용한 치매 회상치료 프로그램입니다.
+```
+Generative AI를 활용한 치매 회상치료 프로그램입니다.  
+```
 
 ![Upmentia (2)](https://github.com/NahyeonKang/upmentia/assets/24906028/0f79e953-a15c-42fd-bc37-a929cf420ecc)
 ![Upmentia (3)](https://github.com/NahyeonKang/upmentia/assets/24906028/0053cd20-0e3f-4923-b727-59d69ac65355)
