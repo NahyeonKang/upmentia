@@ -1,4 +1,6 @@
 # upmentia
+
+<img src="https://github.com/NahyeonKang/upmentia/assets/24906028/0b2d5c53-e922-44a6-867c-54047b974341" width="50" height="50"/>
 ![Upmentia](https://github.com/NahyeonKang/upmentia/assets/24906028/0b2d5c53-e922-44a6-867c-54047b974341)  
 
 ![1-2](https://github.com/NahyeonKang/upmentia/assets/24906028/fc1f62e1-83fd-4670-91ee-6ad6b2c62187)  
