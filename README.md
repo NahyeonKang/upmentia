@@ -15,10 +15,10 @@ Generative AI를 활용한 치매 회상치료 프로그램입니다.
 ![Upmentia (3)](https://github.com/NahyeonKang/upmentia/assets/24906028/0053cd20-0e3f-4923-b727-59d69ac65355)  
 
 
-대화 내용 및 생성 이미지를 보여주는 웹페이지  
-
-
 ![Upmentia (4)](https://github.com/NahyeonKang/upmentia/assets/24906028/2fbf825e-6da9-471c-a4fb-40c1bf5db896)   
+
+
+대화 내용 및 생성 이미지를 보여주는 웹페이지  
 
 
 ![Upmentia (5)](https://github.com/NahyeonKang/upmentia/assets/24906028/9cf368e7-c905-4e35-9ff3-b954fac566ff)  
@@ -51,4 +51,6 @@ GPT가 주제에 맞는 첫 질문을 생성합니다.
 변환된 텍스트 혹은 사용자가 입력한 텍스트는 GPT에 전달되어 답변에 대한 반응과 꼬리질문을 생성합니다.  
 
 
-![5 drawio](https://github.com/NahyeonKang/upmentia/assets/24906028/91f7071f-2d51-4ff1-af9d-95cf29534621)
+![5 drawio](https://github.com/NahyeonKang/upmentia/assets/24906028/91f7071f-2d51-4ff1-af9d-95cf29534621  
+
+동시에 Dall-E가 보다 정확한 이미지를 생성할 수 있도록 같은 텍스트가 GPT로 전달되어 영어로 번역된 후  Dall-E Prompt를 생성합니다. 해당 Prompt는 Dall-E로 입력되어 사용자의 답변을 묘사하는 이미지를 생성합니다.
