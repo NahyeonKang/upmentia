@@ -1,6 +1,8 @@
-# upmentia
+<img src="https://github.com/NahyeonKang/upmentia/assets/24906028/0b2d5c53-e922-44a6-867c-54047b974341" width="300" height="300"/>
+# Upmentia
+## Generative AI를 활용한 치매 회상치료 프로그램입니다.
 
-<img src="https://github.com/NahyeonKang/upmentia/assets/24906028/0b2d5c53-e922-44a6-867c-54047b974341" width="200" height="200"/>
+
 
 ![1-2](https://github.com/NahyeonKang/upmentia/assets/24906028/fc1f62e1-83fd-4670-91ee-6ad6b2c62187)  
 
